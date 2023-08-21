@@ -1,0 +1,5 @@
+"id","name","description","userId","isPublished","productImage","price","rating","createdBy"
+"6486ea5d135891e6cbcac7d2","products","good","6483176ef4db8d3ce9989648",true,"https://m.media-amazon.com/images/I/71Ftzmh3XWL._SL1500_.jpg",343,5,"6483176ef4db8d3ce9989648"
+"64c90877b06b96de269a40af","Electrical Applicances","new oneplus","64c7fb5864afe0835f0adfc2",true,"https://m.media-amazon.com/images/I/71Ftzmh3XWL._SL1500_.jpg",2099,5,"64c7fb5864afe0835f0adfc2"
+"64c90ceab06b96de269a40b3","Mobile","8gb ram","64c7fb5864afe0835f0adfc2",false,"https://m.media-amazon.com/images/I/71Ftzmh3XWL._SL1500_.jpg",2099,5,"64c7fb5864afe0835f0adfc2"
+"64d6134455eec96b6826d4f2",,,"6483176ef4db8d3ce9989648",false,,,,

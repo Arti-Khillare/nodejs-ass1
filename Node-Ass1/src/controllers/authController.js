@@ -23,7 +23,7 @@ exports.registerUser = async (req, res, next) => {
     try {
      const user = await userService.getUserByEmail(req.body.email);
      if (!user || !(await user.isPasswordMatch(req.body.password))) {
-       return res.status(400).send({ status : 'failure', message : 'Invalid password or email'})
+       return res.status(403).send({ status : 'failure', message : 'Invalid password or email'})
      }
      const token = await tokenService.generateToken(user._id, user.role)
      res.setHeader("x-access-token", token);

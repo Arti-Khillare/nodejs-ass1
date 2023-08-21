@@ -1,7 +1,7 @@
 const productModel = require('../models/productModel');
 
 exports.getAllProducts = async () => {
-    return await productModel.find();
+    return await productModel.find({isDeleted: false});
 };
 
 exports.addProducts = async (productBody) => {
@@ -28,11 +28,11 @@ exports.deleteProductById = async (id) => {
     )
 };
 
-exports.deleteProducts = async () => {
+exports.deleteProducts = async (userId) => {
     return await productModel.updateMany(
-        { isDeleted: false },
+        { userId : userId, isDeleted: false },
         { $set: { isDeleted: true } },
-        { upsert: true }
+        { new: true }
     );
 };
 
@@ -51,8 +51,8 @@ exports.isProductExists = async (userId) => {
 exports.detailstoProduct = async (userId, productBody) => {
     return await productModel.findOneAndUpdate(
       { userId: userId },
-      { $set: productBody },
-      { new: true }
+      { $set: {productBody} },
+      { upsert: true }
     )
 };
 

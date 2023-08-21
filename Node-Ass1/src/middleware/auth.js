@@ -8,6 +8,7 @@ const isAuthenticated = async (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, "secretKey");
+    console.log(decoded, "decoded")
     req.userId = decoded.userId;
     req.role = decoded.role;
     next()
@@ -22,14 +23,19 @@ const isAuthorizedRole = async (req, res, next) => {
   if (req.role != roleFromToken) {
     return res
       .status(400)
-      .send({ status: false, message: "Unauthorized Access role must be admin" });
+      .send({ status: false, message: "Unauthorized Access role must be have access" });
   }
   next()
 }
 
 const isAuthorizedUser = async (req, res, next) => {
-  const userFromToken = req.params.id
-  if(req.userId != userFromToken) {
+  // const userFromToken = req.params.id
+  const userFromToken = req.userId
+  
+  console.log(req.params.id)
+  console.log(req.body.userId)
+  console.log(userFromToken)
+  if((req.params.id || req.params.userId || req.body.userId)!= userFromToken) {
     return res
       .status(400)
       .send({ status : false, message: "Unauthorized Access user must be authorized "})

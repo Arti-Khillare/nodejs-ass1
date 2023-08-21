@@ -1,7 +1,7 @@
 const userModel = require("../models/userModel");
 
 exports.getAllUsers = async () => {
-  return await userModel.find();
+  return await userModel.find({isDeleted: false});
 };
 
 exports.registerUser = async (userBody) => {
@@ -25,10 +25,10 @@ exports.updateUser = async (id, userBody) => {
 };
 
 exports.deleteUser = async (id) => {
-  return await userModel.findOneAndUpdate(
+  return await userModel.findByIdAndUpdate(
     { _id: id, isDeleted: false },
     { $set: { isDeleted: true } },
-    { new: true }
+    { new: true  }
   );
 };
 

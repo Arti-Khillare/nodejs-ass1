@@ -39,8 +39,7 @@ const productSchema = new mongoose.Schema({
     },
     createdBy : {
         type : ObjectId,
-        ref : "User",
-        required : true
+        ref : "User"
     },
     isDeleted: { 
         type: Boolean, 

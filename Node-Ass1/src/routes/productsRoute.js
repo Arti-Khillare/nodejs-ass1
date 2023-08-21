@@ -1,7 +1,6 @@
 const express = require('express');
 const auth = require('../middleware/auth');
 const router = express.Router();
-
 const {
     getAllProducts,
     addProducts,
@@ -10,7 +9,9 @@ const {
     deleteProductById,
     deleteProducts,
     getPublishedProducts,
-    getProductByName
+    getProductByName,
+    getProductsCSV,
+    add,
 } = require('../controllers/productController');
 
 router.route('/')
@@ -28,5 +29,9 @@ router.route('/product/published')
 
 router.route('/product/byname/?')
 .get(auth.isAuthenticated, auth.isAuthorizedRole, getProductByName)
+
+router.route('/upload/product/').get(getProductsCSV) 
+
+router.route('/add').post(auth.isAuthenticated,  add)
 
 module.exports = router;
