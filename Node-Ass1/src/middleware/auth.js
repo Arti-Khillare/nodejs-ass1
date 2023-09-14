@@ -29,7 +29,7 @@ const isAuthorizedRole = async (req, res, next) => {
 }
 
 const isAuthorizedUser = async (req, res, next) => {
-  // const userFromToken = req.params.id
+  // const userFromToken = req.params.id 
   const userFromToken = req.userId
   
   console.log(req.params.id)
