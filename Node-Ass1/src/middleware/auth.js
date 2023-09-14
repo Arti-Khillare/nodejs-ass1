@@ -31,10 +31,13 @@ const isAuthorizedRole = async (req, res, next) => {
 const isAuthorizedUser = async (req, res, next) => {
   // const userFromToken = req.params.id
   const userFromToken = req.userId
-  
+  const roleFromToken = req.headers["role"]
+  if(roleFromToken === "admin") {
+    next(); return;
+  }
   console.log(req.params.id)
   console.log(req.body.userId)
-  console.log(userFromToken)
+  console.log(userFromToken, roleFromToken)
   if((req.params.id || req.params.userId || req.body.userId)!= userFromToken) {
     return res
       .status(400)
