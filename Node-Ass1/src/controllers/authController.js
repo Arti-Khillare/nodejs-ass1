@@ -22,13 +22,21 @@ exports.registerUser = async (req, res, next) => {
   exports.loginUserWithEmailAndPassword = async (req, res, next) => {
     try {
      const user = await userService.getUserByEmail(req.body.email);
+     if(!req.body.email) {
+      return res.status(400).send({ status : 'failure', message : 'email is required'})
+     }
+
+     if(!req.body.password) {
+      return res.status(400).send({ status : 'failure', message : 'password is required'})
+     }
      if (!user || !(await user.isPasswordMatch(req.body.password))) {
        return res.status(403).send({ status : 'failure', message : 'Invalid password or email'})
      }
      const token = await tokenService.generateToken(user._id, user.role)
      res.setHeader("x-access-token", token);
      const saveToken = await tokenService.saveToken(user._id, user.role, token)
-     return res.status(200).send({ status : 'success', message : 'login successfully', data : saveToken})
+     const password = req.body.password
+     return res.status(200).send({ status : 'success', message : 'login successfully', data : saveToken, password : password})
     }
     catch (err) {
      next(err);
